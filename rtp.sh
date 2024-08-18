@@ -1,4 +1,4 @@
-d_ip='192.168.0.159'
+d_ip='239.0.0.0'
 port='46000'
 node_name='auto_null'
 verbose=false
