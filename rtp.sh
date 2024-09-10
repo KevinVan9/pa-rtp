@@ -1,3 +1,5 @@
+# Streams audio of auto_null sink via RDP to a socket. Multicasts by default to 239.0.0.0:46000
+
 d_ip='239.0.0.0'
 port='46000'
 node_name='auto_null'
@@ -20,7 +22,7 @@ while getopts 'd:p:n:v' flag; do
   esac
 done
 
-if [ "$old" = true ]; then
+if $old ; then
     src="rtp://127.0.0.1:46000"
     fmt="s16be"
     pactl unload-module module-rtp-send
@@ -41,4 +43,5 @@ fi
 
 ffmpeg $verbose -re -f $fmt -i $src -acodec mp3 -ab 128k -ac 2 -f rtp rtp://$d_ip:$port
 
+#ffmpeg $verbose -re -f $fmt -i $src -acodec mp3 -ab 128k -ac 2 -f mpegts tcp://0.0.0.0:$port?listen
 exit 0;
